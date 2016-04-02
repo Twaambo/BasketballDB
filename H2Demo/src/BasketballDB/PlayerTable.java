@@ -22,8 +22,8 @@ public class PlayerTable {
      *
      * The table must already exist
      *
-     * @param conn
-     * @param fileName
+     * @param conn the database conenction
+     * @param fileName name of the csv file to read from
      * @throws SQLException
      */
     public static void populatePersonTableFromCSV(Connection conn,
@@ -47,10 +47,62 @@ public class PlayerTable {
         }
 
         //Create an sql query to insert all the players into the table at once
-        String sql = createPersonInsertSQL(players);
+        String sql = createPlayerInsertSQL(players);
 
         //Create and execute the sql statement
         Statement stmt = conn.createStatement();
         stmt.execute(sql);
     }
+
+    /**
+     * Create a player table if it does not exist
+     * @param conn the database conenction
+     */
+    public static void createPlayerTable(Connection conn){
+        try{
+            String query = "CREATE TABLE IF NOT EXISTS players("
+                    + "PLAYER_ID INT PRIMARY KEY,"
+                    + "FIRST_NAME VARCHAR(255),"
+                    + "LAST_NAME VARCHAR(255),"
+                    + "DATE_OF_BIRTH TIMESTAMP,"
+                    + "POSITION CHAR,"
+                    + ");" ;
+            Statement stmt = conn.createStatement();
+            stmt.execute(query);
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * For each player in the player list, the player is added to the player table
+     * @param players
+     * @return
+     */
+    public static String createPlayerInsertSQL(ArrayList<Player> players){
+        StringBuilder sb = new StringBuilder();
+
+        //The start of the statement that tells it the order of the attributes
+        sb.append("INSERT INTO players (PLAYER_ID, FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, POSITION) VALUES");
+
+        for(int i = 0; i < players.size(); i++){
+            Player p = players.get(i);
+            sb.append(String.format("(%d,\'%s\',\'%s\',\'%s\''%s')",
+                    p.getPlayer_id(), p.getfName(), p.getlName(), p.getDob(), p.getPostion()));
+
+            //If it's the last, add a semi-colon to end the statement
+            if(i != players.size() - 1){
+                sb.append(",");
+            }
+            else{
+                sb.append(";");
+            }
+        }
+
+        return sb.toString();
+    }
+
+    //addPlayer
+
+    //other query stuff
 }

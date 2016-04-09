@@ -20,6 +20,17 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    public void showPlayerView(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Player");
+        FXMLLoader playerLoader = new FXMLLoader(getClass().getResource("views/player.fxml"));
+
+        Pane playerPane = playerLoader.load();
+
+        Scene playerScene = new Scene(playerPane);
+        primaryStage.setScene(playerScene);
+        primaryStage.show();
+
+    }
 
     public static void main(String[] args) {
         launch(args);

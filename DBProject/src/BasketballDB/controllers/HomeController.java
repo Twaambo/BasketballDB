@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 public class HomeController {
     @FXML private GridPane content;
     @FXML private TableView<Player> playerTableView;
-    @FXML private TableView<Team> teamTableView;
     @FXML private TextField searchBar;
     private Presenter presenter = new Presenter();
 
@@ -26,7 +25,6 @@ public class HomeController {
     }
 
     public void changeToPlayerView(ActionEvent event){
-
         Stage stage = (Stage) content.getScene().getWindow();
         //presenter.showPlayerView(primaryStage);
     }

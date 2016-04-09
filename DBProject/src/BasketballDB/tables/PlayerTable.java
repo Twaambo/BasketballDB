@@ -1,9 +1,8 @@
-package BasketballDB;
+package BasketballDB.tables;
 
 import BasketballDB.objects.Player;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -88,7 +87,7 @@ public class PlayerTable {
         for(int i = 0; i < players.size(); i++){
             Player p = players.get(i);
             sb.append(String.format("(%d,\'%s\',\'%s\',\'%s\''%s')",
-                    p.getPlayer_id(), p.getfName(), p.getlName(), p.getDob(), p.getPostion()));
+                    p.getPlayer_id(), p.getFirstName(), p.getLastName(), p.getDob(), p.getPosition()));
 
             //If it's the last, add a semi-colon to end the statement
             if(i != players.size() - 1){

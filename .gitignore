@@ -1,4 +1,4 @@
 bin/
 *.class
 *.iml
-H2Demo/.idea/
+*/.idea/

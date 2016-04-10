@@ -55,7 +55,7 @@ public class PlayerTable {
 
     /**
      * Create a player table if it does not exist
-     * @param conn the database conenction
+     * @param conn the database connection
      */
     public static void createPlayerTable(Connection conn){
         try{
@@ -74,9 +74,9 @@ public class PlayerTable {
     }
 
     /**
-     * For each player in the player list, the player is added to the player table
-     * @param players
-     * @return
+     * Creates an SQL query to add players to the player table from an array list
+     * @param players list of players to add
+     * @return the SQL query as a string
      */
     public static String createPlayerInsertSQL(ArrayList<Player> players){
         StringBuilder sb = new StringBuilder();

@@ -1,23 +1,27 @@
 package BasketballDB.objects;
 
 /**
- * Created by Noah Shiotani on 4/2/2016.
+ * Hold data on a single team
+ * @author Noah Shiotani
  */
 public class Team {
     private int team_id;
     private String name;
-    private String year;
-    private String conference;
+    private String location;
+    private String league;
 
-    public Team (int team_id, String name, String year) {
+    public Team (int team_id, String name, String location, String league) {
         this.team_id = team_id;
         this.name = name;
-        this.year = year;
-        this.conference = conference;
+        this.location = location;
+        this.league = league;
     }
 
-    public String getYear() {
-        return year;
+    public Team(String[] data){
+        this.team_id = Integer.parseInt(data[0]);
+        this.name = data[1];
+        this.location = data[2];
+        this.league = data[3];
     }
 
     public int getTeam_id() {
@@ -28,7 +32,9 @@ public class Team {
         return name;
     }
 
-    public String getConference() {
-        return conference;
+    public String getLocation() {
+        return location;
     }
+
+    public String getLeague() { return league;}
 }

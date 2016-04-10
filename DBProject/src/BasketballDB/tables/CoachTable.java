@@ -18,7 +18,7 @@ public class CoachTable {
 
     /**
      * Reads a csv file for coach data and adds them to the coach table
-     * <p>
+     *
      * the table must already exist
      *
      * @param conn     the database conenction

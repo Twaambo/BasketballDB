@@ -7,7 +7,11 @@ import java.lang.Integer;
  * @author Noah Shiotani
  */
 public class Coach {
+    //Format: first 5 letters of last name, first 2 letters of first name, then two digits
+    //e.g. Rich Adelman would be ADELMRI01
+    //Digits are presumably there in case people have the same name
     private String coach_id;
+
     private String firstName;
     private String lastName;
     private int careerWins;

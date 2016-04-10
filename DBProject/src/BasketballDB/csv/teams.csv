@@ -1,0 +1,101 @@
+tid,name,location,league
+ANA,Amigos,Anaheim,A
+AND,Duffey Packers,Anderson,N
+ATL,Hawks,Atlanta,N
+BA1,Bullets,Baltimore,N
+BAL,Bullets,Baltimore,N
+BOS,Celtics,Boston,N
+BUF,Braves,Buffalo,N
+CAP,Bullets,Capitol,N
+CAR,Cougars,Carolina,A
+CH1,Stags,Chicago,N
+CH2,Zephyrs,Chicago,N
+CH3,Packers,Chicago,N
+CHA,Hornets,Charlotte,N
+CHI,Bulls,Chicago,N
+CHR,Bobcats,Charlotte,N
+CIN,Royals,Cincinnati,N
+CL1,Rebels,Cleveland,N
+CLE,Cavaliers,Cleveland,N
+DAL,Mavericks,Dallas,N
+DE1,Falcons,Detroit,N
+DEN,Nuggets,Denver,N
+DEN,Rockets,Denver,A
+DET,Pistons,Detroit,N
+DLC,Chaparrals,Dallas,A
+DN1,Nuggets,Denver,N
+FLA,NULL,Floridians,A
+FTW,Zollner Pistons,Fort Wayne,N
+GSW,Warriors,Golden State,N
+HMV,Mavericks,Houston,A
+HOU,Rockets,Houston,N
+IND,Pacers,Indiana,N
+IND,Pacers,Indiana,A
+INI,Olympians,Indianapolis,N
+INJ,Jets,Indianapolis,N
+KCK,Kings,Kansas City,N
+KCO,Kings,Kansas City-Omaha,N
+KEN,Colonels,Kentucky,A
+LAC,Clippers,Los Angeles,N
+LAL,Lakers,Los Angeles,N
+LAS,Stars,Los Angeles,A
+MEM,Grizzlies,Memphis,N
+MFL,Floridians,Miami,A
+MI1,Hawks,Milwaukee,N
+MIA,Heat,Miami,N
+MIE,Lakers,Minneapolis,N
+MIL,Bucks,Milwaukee,N
+MIN,Timberwolves,Minnesota,N
+MMP,Pros,Memphis,A
+MMS,Sounds,Memphis,A
+MMT,Tams,Memphis,A
+MNM,Muskies,Minnesota,A
+MNP,Pipers,Minnesota,A
+NJA,Americans,New Jersey,A
+NJN,Nets,New Jersey,N
+NOB,Buccaneers,New Orleans,A
+NOH,Hornets,New Orleans,N
+NOJ,Jazz,New Orleans,N
+NOO,Hornets,New Orleans-Oklahoma City,N
+NYK,Knicks,New York,N
+NYN,Nets,New York,A
+NYN,Nets,New York,N
+OAK,Oaks,Oakland,A
+OKC,Thunder,Oklahoma City,N
+ORL,Magic,Orlando,N
+PH1,Warriors,Philadelphia,N
+PHI,76ers,Philadelphia,N
+PHO,Suns,Phoenix,N
+PIT,Ironmen,Pittsburgh,N
+POR,Trailblazers,Portland,N
+PRO,Steamrollers,Providence,N
+PTC,Pipers,Pittsburgh,A
+PTP,Pipers,Pittsburgh,A
+ROC,Royals,Rochester,N
+SAC,Kings,Sacramento,N
+SAS,Spurs,San Antonio,N
+SAS,Spurs,San Antonio,A
+SDC,Clippers,San Diego,N
+SDQ,Conquistadors,San Diego,A
+SDR,Rockets,San Diego,N
+SDS,Sails,San Diego,A
+SEA,Supersonics,Seattle,N
+SFW,Warriors,San Francisco,N
+SHE,Redskins,Sheboygan,N
+ST1,Bombers,St. Louis,N
+STL,Spirits,St. Louis,A
+STL,Hawks,St. Louis,N
+SYR,Nationals,Syracuse,N
+TEX,Chaparrals,Texas,A
+TO1,Huskies,Toronto,N
+TOR,Raptors,Toronto,N
+TRI,Blackhawks,Tri-Cities,N
+UTA,Jazz,Utah,N
+UTS,Stars,Utah,A
+VAN,Grizzlies,Vancouver,N
+VIR,Squires,Virginia,A
+WA1,Bullets,Washington,N
+WAC,Caps,Washington,A
+WAS,Wizards,Washington,N
+WAT,Hawks,Waterloo,N
+WSC,Capitols,Washington,N

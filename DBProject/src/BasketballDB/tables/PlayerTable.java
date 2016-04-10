@@ -60,7 +60,7 @@ public class PlayerTable {
     public static void createPlayerTable(Connection conn){
         try{
             String query = "CREATE TABLE IF NOT EXISTS players("
-                    + "PLAYER_ID INT PRIMARY KEY,"
+                    + "PLAYER_ID VARCHAR(255) PRIMARY KEY,"
                     + "FIRST_NAME VARCHAR(255),"
                     + "LAST_NAME VARCHAR(255),"
                     + "DATE_OF_BIRTH TIMESTAMP,"
@@ -86,7 +86,7 @@ public class PlayerTable {
 
         for(int i = 0; i < players.size(); i++){
             Player p = players.get(i);
-            sb.append(String.format("(%d,\'%s\',\'%s\',\'%s\''%s')",
+            sb.append(String.format("(%s,\'%s\',\'%s\',\'%s\''%s')",
                     p.getPlayer_id(), p.getFirstName(), p.getLastName(), p.getDob(), p.getPosition()));
 
             //If it's the last, add a semi-colon to end the statement

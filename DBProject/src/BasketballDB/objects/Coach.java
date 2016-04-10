@@ -7,13 +7,13 @@ import java.lang.Integer;
  * @author Noah Shiotani
  */
 public class Coach {
-    private int coach_id;
+    private String coach_id;
     private String firstName;
     private String lastName;
     private int careerWins;
     private int careerLosses;
 
-    public Coach(int coach_id, String firstName, String lastName, int careerWins, int careerLosses) {
+    public Coach(String coach_id, String firstName, String lastName, int careerWins, int careerLosses) {
         this.coach_id = coach_id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,14 +22,14 @@ public class Coach {
     }
 
     public Coach(String[] data){
-        this.coach_id = Integer.parseInt(data[0]);
+        this.coach_id = data[0];
         this.firstName = data[1];
         this.lastName = data[2];
         this.careerWins = Integer.parseInt(data[3]);
         this.careerLosses = Integer.parseInt(data[4]);
     }
 
-    public int getCoach_id() {
+    public String getCoach_id() {
         return coach_id;
     }
 

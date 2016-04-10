@@ -58,7 +58,7 @@ public class CoachTable {
     public static void createCoachTable(Connection conn){
         try{
             String query = "CREATE TABLE IF NOT EXISTS coaches("
-                    + "COACH_ID INT PRIMARY KEY,"
+                    + "COACH_ID VARCHAR(255) PRIMARY KEY,"
                     + "FIRST_NAME VARCHAR(255),"
                     + "LAST_NAME VARCHAR(255),"
                     + "CAREER_WINS INT,"
@@ -84,7 +84,7 @@ public class CoachTable {
 
         for(int i = 0; i < coaches.size(); i++){
             Coach c = coaches.get(i);
-            sb.append(String.format("(%d,\'%s\',\'%s\',\'%d\''%d')",
+            sb.append(String.format("(%s,\'%s\',\'%s\',\'%d\''%d')",
                     c.getCoach_id(), c.getFirstName(), c.getLastName(), c.getCareerWins(), c.getCareerLosses()));
 
             //If it's the last list, add a semi-colon to end the statement

@@ -58,7 +58,7 @@ public class TeamTable {
     public static void createTeamTable(Connection conn){
         try{
             String query = "CREATE TABLE IF NOT EXISTS teams("
-                    + "TEAM_ID INT PRIMARY KEY,"
+                    + "TEAM_ID VARCHAR(3) PRIMARY KEY,"
                     + "NAME VARCHAR(255),"
                     + "LOCATION VARCHAR(255),"
                     + "LEAGUE VARCHAR(1)"
@@ -83,7 +83,7 @@ public class TeamTable {
 
         for(int i = 0; i < teams.size(); i++){
             Team t = teams.get(i);
-            sb.append(String.format("(%d,\'%s\',\'%s\',\'%s\')",
+            sb.append(String.format("(%s,\'%s\',\'%s\',\'%s\')",
                     t.getTeam_id(), t.getName(), t.getLocation(), t.getLeague()));
 
             //If it's the last list, add a semi-colon to end the statement

@@ -80,7 +80,7 @@ public class TeamSeasonTable {
 
         for(int i = 0; i < teamSeasons.size(); i++){
             TeamSeason ts = teamSeasons.get(i);
-            sb.append(String.format("(%s,\'%s\',\'%s\',\'%d\',\'%d\',\'%d\')",
+            sb.append(String.format("(\'%s\',\'%s\',\'%s\',\'%d\',%d,%d)",
                     ts.getSeasonYear(), ts.getTeamID(), ts.getLeague(), ts.getWin(), ts.getLoss(), ts.getFinish()));
 
             if(i != teamSeasons.size() - 1){

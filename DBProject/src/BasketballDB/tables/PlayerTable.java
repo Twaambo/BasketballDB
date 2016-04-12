@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -37,7 +38,13 @@ public class PlayerTable {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String line;
             while((line = br.readLine()) != null){
+                if(line.isEmpty()) {
+                    continue;
+                }
                 String[] data = line.split(",");
+                if(data[0].equals("pid")) {
+                    continue;
+                }
                 players.add(new Player(data));
             }
             br.close();
@@ -86,7 +93,7 @@ public class PlayerTable {
 
         for(int i = 0; i < players.size(); i++){
             Player p = players.get(i);
-            sb.append(String.format("(%s,\'%s\',\'%s\',\'%s\''%s')",
+            sb.append(String.format(" (\'%s\',\'%s\',\'%s\',\'%s\', \'%s\')",
                     p.getPlayer_id(), p.getFirstName(), p.getLastName(), p.getDob(), p.getPosition()));
 
             //If it's the last, add a semi-colon to end the statement
@@ -99,6 +106,27 @@ public class PlayerTable {
         }
 
         return sb.toString();
+    }
+
+    public static void printPersonTable(Connection conn){
+        String query = "SELECT * FROM players;";
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            System.out.println("hellO");
+
+            while(result.next()){
+                System.out.printf("Person %s: %s %s %s\n",
+                        result.getString(1),
+                        result.getString(2),
+                        result.getString(4),
+                        result.getString(3));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //addPlayer

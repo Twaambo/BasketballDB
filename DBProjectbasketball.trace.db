@@ -1,0 +1,6 @@
+2016-04-11 22:02:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO PERSON (ID, FIRST_NAME, LAST_NAME, MI) VALUES [*]"; expected "("; SQL statement:
+INSERT INTO person (id, FIRST_NAME, LAST_NAME, MI) VALUES [42001-191]
+2016-04-11 22:02:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO PERSON (ID, FIRST_NAME, LAST_NAME, MI) VALUES [*]"; expected "("; SQL statement:
+INSERT INTO person (id, FIRST_NAME, LAST_NAME, MI) VALUES [42001-191]

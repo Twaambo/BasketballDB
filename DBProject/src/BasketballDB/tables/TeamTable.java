@@ -35,7 +35,14 @@ public class TeamTable {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String line;
             while ((line = br.readLine()) != null) {
+                if(line.isEmpty()) {
+                    continue;
+                }
+
                 String[] data = line.split(",");
+                if(data[0].equals("tid")) {
+                    continue;
+                }
                 teams.add(new Team(data));
             }
             br.close();
@@ -83,7 +90,7 @@ public class TeamTable {
 
         for(int i = 0; i < teams.size(); i++){
             Team t = teams.get(i);
-            sb.append(String.format("(%s,\'%s\',\'%s\',\'%s\')",
+            sb.append(String.format("(\'%s\',\'%s\',\'%s\',\'%s\')",
                     t.getTeam_id(), t.getName(), t.getLocation(), t.getLeague()));
 
             //If it's the last list, add a semi-colon to end the statement

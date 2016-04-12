@@ -8,28 +8,25 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    Stage stage;
-    GridPane gridPane;
-
     @Override
     public void start(Stage primaryStage) throws Exception{
-        stage = primaryStage;
+        // Initialize Database
+        H2Main hMain = new H2Main();
+        hMain.init();
+
         Scene mainScene = SceneManager.createMainScene();
 
 
-
-
-
         // Entry Scene
-        stage.setScene(mainScene);
+        primaryStage.setScene(mainScene);
 
         // Window Properties
-        stage.setTitle("Basketball Database");
-        stage.setHeight(600);
-        stage.setWidth(500);
-        stage.setResizable(false);
+        primaryStage.setTitle("Basketball Database");
+        primaryStage.setHeight(600);
+        primaryStage.setWidth(500);
+        primaryStage.setResizable(false);
 
-        stage.show();
+        primaryStage.show();
 //        Presenter presenter = new Presenter();
 //        presenter.showMainView(primaryStage);
     }

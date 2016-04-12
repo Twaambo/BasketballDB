@@ -19,6 +19,7 @@ public class H2Main {
 
 	//The connection to the database
 	private Connection conn;
+	public static Connection test;
 	
 	/**
 	 * Create a database connection with the given params
@@ -41,6 +42,7 @@ public class H2Main {
 			conn = DriverManager.getConnection(url,
 					                           user,
 					                           password);
+			test = conn;
 		} catch (SQLException | ClassNotFoundException e) {
 			//You should handle this better
 			e.printStackTrace();
@@ -69,9 +71,8 @@ public class H2Main {
 	
 	/**
 	 * Starts and runs the database
-	 * @param args: not used but you can use them
 	 */
-	public static void main(String[] args) {
+	public static void init() {
 		
 		H2Main demo = new H2Main();
 		
@@ -142,7 +143,6 @@ public class H2Main {
 			if(jde.toString().contains("Unique index")) {
 				// TODO: Total hack, get rid of this
 				// no-op
-				jde.printStackTrace();
 			}
 			else {
 				jde.printStackTrace();

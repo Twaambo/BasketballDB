@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -103,6 +104,22 @@ public class CoachTable {
         }
 
         return sb.toString();
+    }
+
+    public static ArrayList<Coach> selectCoaches(Connection conn) {
+        String query = "SELECT * FROM coaches;";
+        ArrayList<Coach> results = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            while(result.next()){
+                results.add(new Coach(result.getString(1), result.getString(2), result.getString(3), result.getInt(4), result.getInt(5)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
     }
 
     //addCoach

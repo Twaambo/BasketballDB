@@ -108,6 +108,22 @@ public class PlayerTable {
         return sb.toString();
     }
 
+    public static ArrayList<Player> selectPlayers(Connection conn) {
+        String query = "SELECT * FROM players;";
+        ArrayList<Player> results = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            while(result.next()){
+                results.add(new Player(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
     public static void printPersonTable(Connection conn){
         String query = "SELECT * FROM players;";
         try {

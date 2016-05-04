@@ -13,13 +13,11 @@ public class BasketballDB extends Application {
 
         // Window Properties
         primaryStage.setTitle("Basketball Database");
-        primaryStage.setHeight(600);
+        primaryStage.setHeight(550);
         primaryStage.setWidth(800);
         primaryStage.setResizable(false);
 
         primaryStage.show();
-//        Presenter presenter = new Presenter();
-//        presenter.showMainView(primaryStage);
     }
 
     public static void main(String[] args) {

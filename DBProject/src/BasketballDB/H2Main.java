@@ -91,18 +91,8 @@ public class H2Main {
 			 * and populates it from a csv file
 			 */
 			PlayerTable.createPlayerTable(demo.getConnection());
-			PlayerTable.populatePersonTableFromCSV(
-					demo.getConnection(),
-					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\players.csv");
-		} catch (JdbcSQLException jde) {
-			if(jde.toString().contains("Unique index")) {
-				// TODO: Total hack, get rid of this
-				// no-op
-			}
-			else {
-				jde.printStackTrace();
-			}
-		} catch (SQLException e) {
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 		}
 

@@ -39,7 +39,7 @@ public class TeamSeasonTable {
                 }
 
                 String[] data = line.split(",");
-                if(data[0].equals("tid")) {
+                if(data[0].equals("year")) {
                     continue;
                 }
                 teamSeasons.add(new TeamSeason(data));

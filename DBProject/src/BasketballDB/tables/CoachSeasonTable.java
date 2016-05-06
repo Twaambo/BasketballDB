@@ -38,7 +38,7 @@ public class CoachSeasonTable {
                     continue;
                 }
                 String[] data = line.split(",");
-                if(data[0].equals("cid")) {
+                if(data[0].equals("year")) {
                     continue;
                 }
                 coachSeasons.add(new CoachSeason(data));

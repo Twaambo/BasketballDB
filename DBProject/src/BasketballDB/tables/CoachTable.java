@@ -28,7 +28,7 @@ public class CoachTable {
      */
     public static void populateCoachTableFromCSV(Connection conn, String fileName) throws SQLException {
 
-        //ArrayList to store the coaches that are later added to the table
+        //ArrayList to store the players that are later added to the table
         ArrayList<Coach> coaches = new ArrayList<Coach>();
 
         //Read in the data

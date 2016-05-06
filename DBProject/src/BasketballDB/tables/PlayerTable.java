@@ -26,7 +26,7 @@ public class PlayerTable {
      * @param fileName name of the csv file to read from
      * @throws SQLException
      */
-    public static void populatePlayerTableFromCSV(Connection conn,
+    public static void populatePersonTableFromCSV(Connection conn,
                                                   String fileName)
                                                         throws SQLException{
 

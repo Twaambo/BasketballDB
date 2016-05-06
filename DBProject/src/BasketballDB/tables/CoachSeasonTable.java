@@ -79,7 +79,7 @@ public class CoachSeasonTable {
 
         for(int i = 0; i < coachSeasons.size(); i++){
             CoachSeason cs = coachSeasons.get(i);
-            sb.append(String.format("(\'%s\',\'%s\',\'%s\',%d,%d)",
+            sb.append(String.format("(%s,\'%s\',\'%s\',\'%d\',\'%d\')",
                     cs.getSeasonYear(), cs.getCoachID(), cs.getTeamID(), cs.getWin(), cs.getLoss()));
 
             if(i != coachSeasons.size() - 1){

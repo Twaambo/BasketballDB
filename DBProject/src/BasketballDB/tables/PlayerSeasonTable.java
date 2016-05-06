@@ -82,7 +82,7 @@ public class PlayerSeasonTable {
 
         for(int i = 0; i < playerSeasons.size(); i++){
             PlayerSeason ps = playerSeasons.get(i);
-            sb.append(String.format("(\'%s\',\'%s\',\'%s\',%b,%f,%d)",
+            sb.append(String.format("(%s,\'%s\',\'%s\',\'%b\',\'%f\',\'%d\')",
                     ps.getSeasonYear(), ps.getPlayerID(), ps.getTeamID(), ps.getMVP(), ps.getPPG(), ps.getPlayerNumber()));
 
             if(i != playerSeasons.size() - 1){

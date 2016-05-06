@@ -1,8 +1,11 @@
 package BasketballDB;
 
+import BasketballDB.tables.CoachSeasonTable;
 import BasketballDB.tables.CoachTable;
 import BasketballDB.tables.PlayerTable;
+import BasketballDB.tables.TeamSeasonTable;
 import BasketballDB.tables.TeamTable;
+import BasketballDB.tables.PlayerSeasonTable;
 import org.h2.jdbc.JdbcSQLException;
 
 import java.sql.*;
@@ -91,7 +94,7 @@ public class H2Main {
 			 * and populates it from a csv file
 			 */
 			PlayerTable.createPlayerTable(demo.getConnection());
-			PlayerTable.populatePersonTableFromCSV(
+			PlayerTable.populatePlayerTableFromCSV(
 					demo.getConnection(),
 					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\players.csv");
 		} catch (JdbcSQLException jde) {
@@ -139,6 +142,50 @@ public class H2Main {
 			TeamTable.populateTeamTableFromCSV(
 					demo.getConnection(),
 					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\teams.csv");
+		} catch (JdbcSQLException jde) {
+			if(jde.toString().contains("Unique index")) {
+				// TODO: Total hack, get rid of this
+				// no-op
+			}
+			else {
+				jde.printStackTrace();
+			}
+			} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+
+			/**
+			 * Creates a sample player season table
+			 * and populates it from a csv file
+			 */
+			CoachSeasonTable.createCoachSeasonTable(demo.getConnection());
+			CoachSeasonTable.populateCoachSeasonTableFromCSV(
+					demo.getConnection(),
+					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\coachseasons.csv");
+		} catch (JdbcSQLException jde) {
+			if(jde.toString().contains("Unique index")) {
+				// TODO: Total hack, get rid of this
+				// no-op
+			}
+			else {
+				jde.printStackTrace();
+			}
+			} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+
+			/**
+			 * Creates a sample player season table
+			 * and populates it from a csv file
+			 */
+			TeamSeasonTable.createTeamSeasonTable(demo.getConnection());
+			TeamSeasonTable.populateTeamSeasonTableFromCSV(
+					demo.getConnection(),
+					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\teamseasons.csv");
 		} catch (JdbcSQLException jde) {
 			if(jde.toString().contains("Unique index")) {
 				// TODO: Total hack, get rid of this

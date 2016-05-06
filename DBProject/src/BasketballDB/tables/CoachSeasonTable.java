@@ -1,5 +1,8 @@
 package BasketballDB.tables;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,7 +12,50 @@ import BasketballDB.objects.Coach;
 import BasketballDB.objects.CoachSeason;
 
 public class CoachSeasonTable {
-	
+
+
+    /**
+     * Reads a csv file for coach season data nad adds them to the coach table
+     *
+     * the table must already exist
+     *
+     *
+     * @param conn
+     * @param fileName
+     * @throws SQLException
+     */
+    public static void populateCoachSeasonTableFromCSV(Connection conn, String fileName) throws SQLException{
+
+        //ArrayList to store the coach seasons that are added to the table later
+        ArrayList<CoachSeason> coachSeasons = new ArrayList<CoachSeason>();
+
+        //Read in the data
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            String line;
+            while ((line = br.readLine()) != null) {
+                if(line.isEmpty()) {
+                    continue;
+                }
+                String[] data = line.split(",");
+                if(data[0].equals("cid")) {
+                    continue;
+                }
+                coachSeasons.add(new CoachSeason(data));
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //Create an sql query to insert all the coachSeasons into the table at once
+        String sql = createCoachSeasonInsertSQL(coachSeasons);
+
+        //Create and execute the sql statement
+        Statement stmt = conn.createStatement();
+        stmt.execute(sql);
+    }
+
     public static void createCoachSeasonTable(Connection conn){
         try{
             String query = "CREATE TABLE IF NOT EXISTS coach_season("

@@ -3,7 +3,8 @@
  */
 public class ObserverNotification {
     public enum Type {
-        SEARCH_CRITERIA
+        SEARCH_CRITERIA,
+        QUERY_RESULT_CLEAR, QUERY_RESULT
     }
 
     Type type;

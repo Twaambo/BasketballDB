@@ -16,4 +16,12 @@ public class DBController {
     public void clearCriterias() {
         model.clearCriterias();
     }
+
+    public void selectPlayers() {
+        model.selectPlayers();
+    }
+
+    public void clearQueryResults() {
+        model.clearResults();
+    }
 }

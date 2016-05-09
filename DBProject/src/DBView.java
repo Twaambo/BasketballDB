@@ -1,4 +1,3 @@
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -24,6 +23,7 @@ public class DBView implements Observer {
     private DBController controller;
     private Stage stage;
     private TableView criteriaTable;
+    private TableView resultTable;
 
     // TODO: Where should this go?
     private final ObservableList<String> tableOptions =
@@ -59,7 +59,8 @@ public class DBView implements Observer {
         BorderPane mainPane = new BorderPane();
         criteriaTable = createCriteriaTable();
         mainPane.setLeft(criteriaTable);
-        mainPane.setCenter(createQueryResultTable());
+        resultTable = new TableView();
+        mainPane.setCenter(resultTable);
         queryTab.setContent(mainPane);
 
         // Criteria Buttons
@@ -71,7 +72,15 @@ public class DBView implements Observer {
         tableDropdown.setMinWidth(100);
         // Results Buttons
         Button clearResultsButton = new Button("Clear Result(s)");
+        clearResultsButton.setOnAction((event) -> {
+            clearQueryResultsTable();
+        });
         Button queryButton =  new Button("Query!");
+        queryButton.setOnAction((event) -> {
+            // TODO: Change method;
+            this.controller.selectPlayers();
+
+        });
 
         // margins
         bottomPane.setMargin(queryCriteriaButton, new Insets(10,5,10,10));
@@ -89,8 +98,8 @@ public class DBView implements Observer {
         // Event Listener
         queryCriteriaButton.setOnAction((event) -> {
             Dialog<Pair<String, String>> dialog = new Dialog<>();
-            dialog.setTitle("Login Dialog");
-            dialog.setHeaderText("Look, a Custom Login Dialog");
+            dialog.setTitle("Criteria Dialog");
+            dialog.setHeaderText("Please select a search criteria and specify a value");
 
 
             // Set the button types.
@@ -103,7 +112,16 @@ public class DBView implements Observer {
             grid.setVgap(10);
             grid.setPadding(new Insets(20, 150, 10, 10));
 
-            ComboBox choices = new ComboBox(tableOptions);
+            ComboBox choices;
+            // TODO: ComoboBox decider
+            switch( tableDropdown.getValue().toString()) {
+                case "PLAYERS":
+                    choices = new ComboBox(Player.ColHeaders);
+                    break;
+                default:
+                    choices = new ComboBox();
+            }
+
             TextField value = new TextField();
             value.setPromptText("Value");
 
@@ -163,7 +181,7 @@ public class DBView implements Observer {
         TableView<Criteria> table = new TableView();
 
         TableColumn parameters = new TableColumn("Parameters");
-        parameters.setCellValueFactory(new PropertyValueFactory<Criteria, String>("parameter"));
+//        parameters.setCellValueFactory(new PropertyValueFactory<Criteria, String>("parameter"));
         // TODO: BUG, columns resize when clicked!?
         parameters.prefWidthProperty().bind(table.widthProperty().multiply(0.6));
         parameters.maxWidthProperty().bind(parameters.prefWidthProperty());
@@ -178,28 +196,38 @@ public class DBView implements Observer {
         return table;
     }
 
-    private TableView<QueryResult> createQueryResultTable() {
-        TableView<QueryResult> table = new TableView();
+    private void populateQueryResultTable(ArrayList<QueryResult> results) {
+        resultTable.getColumns().clear();
+        if(!results.isEmpty()) {
+            QueryResult result = results.get(0);
+            if(result instanceof Player) {
 
+            }
 
-        TableColumn parameters = new TableColumn("Test1");
-        parameters.setCellValueFactory(new PropertyValueFactory<QueryResult, String>("parameter"));
-        TableColumn values = new TableColumn("Test2");
-        values.setCellValueFactory(new PropertyValueFactory<QueryResult, String>("value"));
+            for(String param : result.getParameters()) {
+                System.out.println(param);
+                TableColumn newCol = new TableColumn(param);
+                // TODO: Need to find out how to abstract this
+                newCol.setCellValueFactory(new PropertyValueFactory<Player, String>(param));
+                resultTable.getColumns().add(newCol);
+            }
+        }
+    }
 
-        table.getColumns().addAll(parameters, values);
-
-        return table;
+    private void clearQueryResultsTable() {
+        controller.clearQueryResults();
     }
 
     @Override
     public void update(Observable o, Object arg) {
         ObserverNotification notification = (ObserverNotification) arg;
         if(notification.type == ObserverNotification.Type.SEARCH_CRITERIA) {
-            System.out.println("WAT");
             ArrayList<Criteria> criteriaList = (ArrayList<Criteria>) notification.obj;
             criteriaTable.getItems().clear();
             criteriaTable.getItems().addAll(criteriaList);
+        } else if (notification.type == ObserverNotification.Type.QUERY_RESULT) {
+            ArrayList<QueryResult> queryResults = (ArrayList<QueryResult>) notification.obj;
+            populateQueryResultTable(queryResults);
         }
     }
 }

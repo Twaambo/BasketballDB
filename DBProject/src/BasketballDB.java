@@ -8,8 +8,11 @@ public class BasketballDB extends Application {
 //        H2Main hMain = new H2Main();
 //        hMain.init();
 
-        DBController controller = new DBController();
+        DBModel model = new DBModel();
+        DBController controller = new DBController(model);
         DBView view = new DBView(controller, primaryStage);
+
+        model.addObserver(view);
 
         // Window Properties
         primaryStage.setTitle("Basketball Database");

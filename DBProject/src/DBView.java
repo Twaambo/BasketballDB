@@ -11,10 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Created by Kenny on 5/4/2016.
@@ -204,14 +201,16 @@ public class DBView implements Observer {
 
             }
 
+            HashMap<String, String> values = result.getValues();
             for(String param : result.getParameters()) {
                 System.out.println(param);
                 TableColumn newCol = new TableColumn(param);
                 // TODO: Need to find out how to abstract this
-                newCol.setCellValueFactory(new PropertyValueFactory<Player, String>(param));
+                newCol.setCellValueFactory(new PropertyValueFactory<QueryResult, String>(param));
                 resultTable.getColumns().add(newCol);
             }
         }
+        resultTable.getItems().addAll(results);
     }
 
     private void clearQueryResultsTable() {

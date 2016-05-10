@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Kenny on 5/4/2016.
@@ -6,4 +7,5 @@ import java.util.ArrayList;
 public interface QueryResult {
     ArrayList<String> getParameters();
 
+    HashMap<String,String> getValues();
 }

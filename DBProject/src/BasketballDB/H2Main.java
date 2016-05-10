@@ -91,7 +91,7 @@ public class H2Main {
 			 * and populates it from a csv file
 			 */
 			PlayerTable.createPlayerTable(demo.getConnection());
-			PlayerTable.populatePersonTableFromCSV(
+			PlayerTable.populatePlayerTableFromCSV(
 					demo.getConnection(),
 					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\players.csv");
 		} catch (JdbcSQLException jde) {

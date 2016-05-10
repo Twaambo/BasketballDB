@@ -90,7 +90,6 @@ public class PlayerTable {
 
         //The start of the statement that tells it the order of the attributes
         sb.append("INSERT INTO players (PLAYER_ID, FIRST_NAME, LAST_NAME, DATE_OF_BIRTH, POSITION) VALUES");
-
         for(int i = 0; i < players.size(); i++){
             Player p = players.get(i);
             sb.append(String.format(" (\'%s\',\'%s\',\'%s\',\'%s\', \'%s\')",

@@ -53,8 +53,8 @@ public class SceneManager {
         placeHolderPane.setCenter(new Label("TO BE IMPLEMENTED"));
         placeholder.setContent(placeHolderPane);
 
-        // Create Player Tab
-        Tab playerTab = new Tab("Player");
+        // Create objects.Player Tab
+        Tab playerTab = new Tab("objects.Player");
         playerTab.setClosable(false);
         TableView<Player> playerTable = createPlayerTable();
 
@@ -173,7 +173,7 @@ public class SceneManager {
     private static TableView<Player> createPlayerTable() {
         TableView<Player> table = new TableView();
 
-        TableColumn playerIDCol = new TableColumn("Player ID");
+        TableColumn playerIDCol = new TableColumn("objects.Player ID");
         playerIDCol.setCellValueFactory(new PropertyValueFactory<Player, String>("player_id"));
         TableColumn firstNameCol = new TableColumn("First Name");
         firstNameCol.setCellValueFactory(new PropertyValueFactory<Player, String>("firstName"));

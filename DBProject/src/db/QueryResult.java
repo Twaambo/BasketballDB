@@ -1,3 +1,5 @@
+package db;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -6,6 +8,4 @@ import java.util.HashMap;
  */
 public interface QueryResult {
     ArrayList<String> getParameters();
-
-    HashMap<String,String> getValues();
 }

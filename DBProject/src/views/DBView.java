@@ -1,3 +1,9 @@
+package views;
+
+import db.Criteria;
+import db.DBController;
+import db.ObserverNotification;
+import db.QueryResult;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -10,6 +16,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import objects.Player;
 
 import java.util.*;
 
@@ -21,8 +28,11 @@ public class DBView implements Observer {
     private Stage stage;
     private TableView criteriaTable;
     private TableView resultTable;
+    private Button clearResultsButton;
+    private Button queryButton;
+    private Button clearCriteriaButton;
+    private Button queryCriteriaButton;
 
-    // TODO: Where should this go?
     private final ObservableList<String> tableOptions =
             FXCollections.observableArrayList(
                     "COACHES",
@@ -60,30 +70,43 @@ public class DBView implements Observer {
         mainPane.setCenter(resultTable);
         queryTab.setContent(mainPane);
 
-        // Criteria Buttons
+        // db.Criteria Buttons
         FlowPane bottomPane = new FlowPane();
-        Button queryCriteriaButton = new Button("Add Query Criteria");
-        Button clearCriteriaButton = new Button("Clear Criteria(s)");
+        queryCriteriaButton = new Button("Add Query Criteria");
+        queryCriteriaButton.setDisable(true);
+        clearCriteriaButton = new Button("Clear Criteria(s)");
+        clearCriteriaButton.setDisable(true);
         // Table Selector Dropdown
         ComboBox tableDropdown = new ComboBox(tableOptions);
         tableDropdown.setMinWidth(100);
+        tableDropdown.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                queryButton.setDisable(false);
+                queryCriteriaButton.setDisable(false);
+            } else {
+                queryButton.setDisable(true);
+                queryCriteriaButton.setDisable(true);
+            }
+        });
         // Results Buttons
-        Button clearResultsButton = new Button("Clear Result(s)");
+        clearResultsButton = new Button("Clear Result(s)");
         clearResultsButton.setOnAction((event) -> {
             clearQueryResultsTable();
         });
-        Button queryButton =  new Button("Query!");
+        clearResultsButton.setDisable(true);
+        queryButton =  new Button("Query!");
         queryButton.setOnAction((event) -> {
             // TODO: Change method;
             this.controller.selectPlayers();
 
         });
+        queryButton.setDisable(true);
 
         // margins
         bottomPane.setMargin(queryCriteriaButton, new Insets(10,5,10,10));
         bottomPane.setMargin(clearCriteriaButton, new Insets(10,5,10,10));
         bottomPane.setMargin(tableDropdown, new Insets(10,5,10,60));
-        bottomPane.setMargin(clearResultsButton, new Insets(10, 10, 10, 150));
+        bottomPane.setMargin(clearResultsButton, new Insets(10, 5, 10, 130));
         bottomPane.setMargin(queryButton, new Insets(10, 10, 10, 5));
 
         // Add all to the pane
@@ -169,7 +192,6 @@ public class DBView implements Observer {
 
         // Add Tabs to TabPane
         tabPane.getTabs().add(queryTab);
-        // TODO: Do we want to add plotting? if not get rid of tabs
 
         return tabPane;
     }
@@ -178,7 +200,7 @@ public class DBView implements Observer {
         TableView<Criteria> table = new TableView();
 
         TableColumn parameters = new TableColumn("Parameters");
-//        parameters.setCellValueFactory(new PropertyValueFactory<Criteria, String>("parameter"));
+        parameters.setCellValueFactory(new PropertyValueFactory<Criteria, String>("parameter"));
         // TODO: BUG, columns resize when clicked!?
         parameters.prefWidthProperty().bind(table.widthProperty().multiply(0.6));
         parameters.maxWidthProperty().bind(parameters.prefWidthProperty());
@@ -197,15 +219,8 @@ public class DBView implements Observer {
         resultTable.getColumns().clear();
         if(!results.isEmpty()) {
             QueryResult result = results.get(0);
-            if(result instanceof Player) {
-
-            }
-
-            HashMap<String, String> values = result.getValues();
             for(String param : result.getParameters()) {
-                System.out.println(param);
                 TableColumn newCol = new TableColumn(param);
-                // TODO: Need to find out how to abstract this
                 newCol.setCellValueFactory(new PropertyValueFactory<QueryResult, String>(param));
                 resultTable.getColumns().add(newCol);
             }
@@ -224,9 +239,19 @@ public class DBView implements Observer {
             ArrayList<Criteria> criteriaList = (ArrayList<Criteria>) notification.obj;
             criteriaTable.getItems().clear();
             criteriaTable.getItems().addAll(criteriaList);
+            if(criteriaList.isEmpty()) {
+                clearCriteriaButton.setDisable(true);
+            } else {
+                clearCriteriaButton.setDisable(false);
+            }
         } else if (notification.type == ObserverNotification.Type.QUERY_RESULT) {
             ArrayList<QueryResult> queryResults = (ArrayList<QueryResult>) notification.obj;
             populateQueryResultTable(queryResults);
+            if(queryResults.isEmpty()) {
+                clearResultsButton.setDisable(true);
+            } else {
+                clearResultsButton.setDisable(false);
+            }
         }
     }
 }

@@ -1,11 +1,14 @@
+import db.DBController;
+import db.DBModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import views.DBView;
 
 public class BasketballDB extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         // Initialize Database
-//        H2Main hMain = new H2Main();
+//        db.H2Main hMain = new db.H2Main();
 //        hMain.init();
 
         DBModel model = new DBModel();

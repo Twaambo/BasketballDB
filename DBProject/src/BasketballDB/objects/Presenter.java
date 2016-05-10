@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class Presenter {
 
     public void showPlayerView(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Player");
+        primaryStage.setTitle("objects.Player");
         FXMLLoader playerLoader = new FXMLLoader(getClass().getResource("../views/player.fxml"));
 
         Pane playerPane = playerLoader.load();

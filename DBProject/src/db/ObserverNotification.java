@@ -1,3 +1,5 @@
+package db;
+
 /**
  * Created by Kenny on 5/9/2016.
  */
@@ -7,8 +9,8 @@ public class ObserverNotification {
         QUERY_RESULT_CLEAR, QUERY_RESULT
     }
 
-    Type type;
-    Object obj;
+    public Type type;
+    public Object obj;
 
     public ObserverNotification(Type type, Object obj) {
         this.type = type;

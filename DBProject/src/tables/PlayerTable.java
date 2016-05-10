@@ -1,3 +1,8 @@
+package tables;
+
+import db.QueryResult;
+import objects.Player;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

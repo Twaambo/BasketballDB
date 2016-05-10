@@ -1,3 +1,6 @@
+package objects;
+
+import db.QueryResult;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -5,14 +8,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Kenny on 5/4/2016.
+ * Hold data on a single player
+ * @author Noah Shiotani
  */
 public class Player implements QueryResult {
     public static final ArrayList<String> Parameters = new ArrayList() {{
         add("player_id");
         add("firstName");
-        add("dob");
         add("lastName");
+        add("dob");
         add("position");
     }};
 
@@ -35,21 +39,12 @@ public class Player implements QueryResult {
     private String dob;
     private String position; //Maybe make an enum for positions or something?
 
-    private HashMap<String, String> values;
-
     public Player(String player_id, String firstName, String lastName, String dob, String position) {
         this.player_id = player_id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
         this.position = position;
-
-        this.values = new HashMap<String, String>();
-        this.values.put("player_id", player_id);
-        this.values.put("firstName", firstName);
-        this.values.put("lastName", lastName);
-        this.values.put("dob", dob);
-        this.values.put("position", position);
     }
 
     public Player(String[] data){
@@ -83,11 +78,6 @@ public class Player implements QueryResult {
     @Override
     public ArrayList<String> getParameters() {
         return Parameters;
-    }
-
-    @Override
-    public HashMap<String, String> getValues() {
-        return values;
     }
 
     public String toString() {

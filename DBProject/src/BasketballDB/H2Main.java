@@ -87,7 +87,7 @@ public class H2Main {
 		try {
 
 			/**
-			 * Creates a sample Player table
+			 * Creates a sample objects.Player table
 			 * and populates it from a csv file
 			 */
 			PlayerTable.createPlayerTable(demo.getConnection());

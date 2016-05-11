@@ -2,8 +2,6 @@ package views;
 
 import db.Criteria;
 import db.DBController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -14,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import objects.*;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -73,7 +70,7 @@ public class QueryView {
         queryButton =  new Button("Query!");
         queryButton.setOnAction((event) -> {
             this.controller.clearQueryResults();
-            this.controller.selectPlayers(tableDropdown.getValue().toString());
+            this.controller.selectAllFromTable(tableDropdown.getValue().toString());
 
         });
         queryButton.setDisable(true);

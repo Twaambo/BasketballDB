@@ -20,10 +20,10 @@ public class Team implements QueryResult {
 
     public static final ObservableList<String> ColHeaders =
             FXCollections.observableArrayList(
-                    "team_id",
-                    "name",
-                    "location",
-                    "league"
+                    "TEAM_ID",
+                    "NAME",
+                    "LOCATION",
+                    "LEAGUE"
             );
 
     private String team_id;

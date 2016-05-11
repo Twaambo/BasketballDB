@@ -22,11 +22,11 @@ public class Player implements QueryResult {
 
     public static final ObservableList<String> ColHeaders =
             FXCollections.observableArrayList(
-                    "player_id",
-                    "firstName",
-                    "lastName",
-                    "dob",
-                    "position"
+                    "PLAYER_ID",
+                    "FIRST_NAME",
+                    "LAST_NAME",
+                    "DATE_OF_BIRTH",
+                    "POSITION"
             );
 
     //Format: first 5 letters of last name, first 2 letters of first name, then two digits

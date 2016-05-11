@@ -18,12 +18,12 @@ public class PlayerSeason implements QueryResult {
 
 	public static final ObservableList<String> ColHeaders =
 			FXCollections.observableArrayList(
-					"seasonYear",
-					"playerID",
-					"teamID",
+					"SEASON_YEAR",
+					"PLAYER_ID",
+					"TEAM_ID",
 					"MVP",
 					"PPG",
-					"playerNumber"
+					"PLAYER_NUMBER"
 			);
 	
 	private String seasonYear;

@@ -2,6 +2,7 @@ package db;
 
 import tables.*;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,29 +42,30 @@ public class DBModel extends Observable {
         this.notifyObservers(new ObserverNotification(ObserverNotification.Type.SEARCH_CRITERIA, searchCriterias));
     }
 
-    public void selectPlayers() {
-        queryResults = PlayerTable.selectPlayers(database.getConnection());
-        this.setChanged();
-        this.notifyObservers(new ObserverNotification(ObserverNotification.Type.QUERY_RESULT, queryResults));
-    }
-
-    public void selectPlayers(String table) {
-        // TODO: HERE
+    public void selectAllFromTable(String table) {
         switch (table) {
             case "PLAYERS": {
                 if(searchCriterias.isEmpty()) {
                     queryResults = PlayerTable.selectPlayers(database.getConnection());
                 } else {
-
+                    queryResults = PlayerTable.selectPlayers(database.getConnection(), searchCriterias);
                 }
                 break;
             }
-            //case "PLAYER_SEASON":
+            /* TODO
+            case "PLAYER_SEASON": {
+                if(searchCriterias.isEmpty()) {
+                    queryResults = CoachTable.selectCoaches(database.getConnection());
+                } else {
+                    queryResults = CoachTable.selectCoaches(database.getConnection(), searchCriterias);
+                }
+                break;
+            }*/
             case "COACHES": {
                 if(searchCriterias.isEmpty()) {
                     queryResults = CoachTable.selectCoaches(database.getConnection());
                 } else {
-
+                    queryResults = CoachTable.selectCoaches(database.getConnection(), searchCriterias);
                 }
                 break;
             }
@@ -71,7 +73,7 @@ public class DBModel extends Observable {
                 if (searchCriterias.isEmpty()) {
                     queryResults = CoachSeasonTable.selectCoachSeasons(database.getConnection());
                 } else {
-
+                    queryResults = CoachSeasonTable.selectCoachSeasons(database.getConnection(), searchCriterias);
                 }
                 break;
             }
@@ -79,7 +81,7 @@ public class DBModel extends Observable {
                 if(searchCriterias.isEmpty()) {
                     queryResults = TeamTable.selectTeams(database.getConnection());
                 } else {
-
+                    queryResults = TeamTable.selectTeams(database.getConnection(), searchCriterias);
                 }
                 break;
             }
@@ -87,7 +89,7 @@ public class DBModel extends Observable {
                 if (searchCriterias.isEmpty()) {
                     queryResults = TeamSeasonTable.selectTeamSeason(database.getConnection());
                 } else {
-
+                    queryResults = TeamSeasonTable.selectTeamSeason(database.getConnection(), searchCriterias);
                 }
                 break;
             }

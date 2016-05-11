@@ -21,8 +21,8 @@ public class DBController {
         model.clearCriterias();
     }
 
-    public void selectPlayers(String table) {
-        model.selectPlayers(table);
+    public void selectAllFromTable(String table) {
+        model.selectAllFromTable(table);
     }
 
     public void clearQueryResults() {

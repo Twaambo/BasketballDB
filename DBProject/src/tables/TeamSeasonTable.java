@@ -1,7 +1,9 @@
 package tables;
 
+import db.Criteria;
 import db.QueryResult;
 import objects.CoachSeason;
+import objects.Player;
 import objects.TeamSeason;
 
 import java.io.BufferedReader;
@@ -102,6 +104,33 @@ public class TeamSeasonTable {
         try {
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(query);
+
+            while(result.next()){
+                results.add(new TeamSeason(result.getString(1), result.getString(2), result.getString(3), result.getInt(4), result.getInt(5), result.getInt(6)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    public static ArrayList<QueryResult> selectTeamSeason(Connection conn, ArrayList<Criteria> criterias) {
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("SELECT * FROM team_season WHERE ");
+
+        String border = "";
+        for(Criteria crit : criterias) {
+            sb.append(border);
+            sb.append(crit.getParameter() + "='" + crit.getValue() + "'");
+            border = ",";
+        }
+        sb.append(";");
+
+        ArrayList<QueryResult> results = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(sb.toString());
 
             while(result.next()){
                 results.add(new CoachSeason(result.getString(1), result.getString(2), result.getString(3), result.getInt(4), result.getInt(5)));

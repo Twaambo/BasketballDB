@@ -1,12 +1,17 @@
 package tables;
 
 
+import db.Criteria;
+import db.QueryResult;
+import objects.CoachSeason;
+import objects.Player;
 import objects.PlayerSeason;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -94,5 +99,48 @@ public class PlayerSeasonTable {
 
         return sb.toString();
     }
-	
+
+    public static ArrayList<QueryResult> selectPlayerSeasons(Connection conn) {
+        String query = "SELECT * FROM player_season;";
+        ArrayList<QueryResult> results = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            while(result.next()){
+                results.add(new PlayerSeason(result.getString(1), result.getString(2), result.getString(3), result.getBoolean(4), result.getFloat(5), result.getInt(6)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    public static ArrayList<QueryResult> selectPlayerSeasons(Connection conn, ArrayList<Criteria> criterias) {
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("SELECT * FROM players WHERE ");
+
+        String border = "";
+        for(Criteria crit : criterias) {
+            sb.append(border);
+            sb.append(crit.getParameter() + "='" + crit.getValue() + "'");
+            border = ",";
+        }
+        sb.append(";");
+
+        ArrayList<QueryResult> results = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(sb.toString());
+
+            while(result.next()){
+                results.add(new PlayerSeason(result.getString(1), result.getString(2), result.getString(3), result.getBoolean(4), result.getFloat(5), result.getInt(6)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
 }

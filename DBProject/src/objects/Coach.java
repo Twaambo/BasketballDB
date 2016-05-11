@@ -21,11 +21,11 @@ public class Coach implements QueryResult{
 
     public static final ObservableList<String> ColHeaders =
             FXCollections.observableArrayList(
-                    "coach_id",
-                    "firstName",
-                    "lastName",
-                    "careerWins",
-                    "careerLosses"
+                    "COACH_ID",
+                    "FIRST_NAME",
+                    "LAST_NAME",
+                    "CAREER_WINS",
+                    "CAREER_LOSSES"
             );
 
     //Format: first 5 letters of last name, first 2 letters of first name, then two digits

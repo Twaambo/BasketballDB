@@ -79,8 +79,4 @@ public class Player implements QueryResult {
     public ArrayList<String> getParameters() {
         return Parameters;
     }
-
-    public String toString() {
-        return firstName;
-    }
 }

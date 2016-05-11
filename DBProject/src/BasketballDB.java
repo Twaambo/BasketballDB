@@ -8,7 +8,7 @@ public class BasketballDB extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         // Initialize Database
-//        db.H2Main hMain = new db.H2Main();
+//        db.H2DB hMain = new db.H2DB();
 //        hMain.init();
 
         DBModel model = new DBModel();

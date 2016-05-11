@@ -16,7 +16,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import objects.Player;
+import objects.*;
 
 import java.util.*;
 
@@ -36,6 +36,7 @@ public class DBView implements Observer {
     private final ObservableList<String> tableOptions =
             FXCollections.observableArrayList(
                     "COACHES",
+                    "COACH_SEASON",
                     "PLAYERS",
                     "PLAYER_SEASON",
                     "TEAMS",
@@ -87,6 +88,7 @@ public class DBView implements Observer {
                 queryButton.setDisable(true);
                 queryCriteriaButton.setDisable(true);
             }
+            controller.clearCriterias();
         });
         // Results Buttons
         clearResultsButton = new Button("Clear Result(s)");
@@ -96,8 +98,8 @@ public class DBView implements Observer {
         clearResultsButton.setDisable(true);
         queryButton =  new Button("Query!");
         queryButton.setOnAction((event) -> {
-            // TODO: Change method;
-            this.controller.selectPlayers();
+            this.controller.clearQueryResults();
+            this.controller.selectPlayers(tableDropdown.getValue().toString());
 
         });
         queryButton.setDisable(true);
@@ -133,10 +135,24 @@ public class DBView implements Observer {
             grid.setPadding(new Insets(20, 150, 10, 10));
 
             ComboBox choices;
-            // TODO: ComoboBox decider
             switch( tableDropdown.getValue().toString()) {
                 case "PLAYERS":
                     choices = new ComboBox(Player.ColHeaders);
+                    break;
+                case "COACHES":
+                    choices = new ComboBox(Coach.ColHeaders);
+                    break;
+                case "COACH_SEASON":
+                    choices = new ComboBox(CoachSeason.ColHeaders);
+                    break;
+                case "PLAYER_SEASON":
+                    choices = new ComboBox(PlayerSeason.ColHeaders);
+                    break;
+                case "TEAMS":
+                    choices = new ComboBox(Team.ColHeaders);
+                    break;
+                case "TEAM_SEASON":
+                    choices = new ComboBox(TeamSeason.ColHeaders);
                     break;
                 default:
                     choices = new ComboBox();
@@ -201,7 +217,7 @@ public class DBView implements Observer {
 
         TableColumn parameters = new TableColumn("Parameters");
         parameters.setCellValueFactory(new PropertyValueFactory<Criteria, String>("parameter"));
-        // TODO: BUG, columns resize when clicked!?
+        // TODO: IGNORING THIS!? BUG, columns resize when clicked!?
         parameters.prefWidthProperty().bind(table.widthProperty().multiply(0.6));
         parameters.maxWidthProperty().bind(parameters.prefWidthProperty());
         parameters.setResizable(false);
@@ -216,6 +232,7 @@ public class DBView implements Observer {
     }
 
     private void populateQueryResultTable(ArrayList<QueryResult> results) {
+        resultTable.getColumns().remove(0, resultTable.getColumns().size());
         resultTable.getColumns().clear();
         if(!results.isEmpty()) {
             QueryResult result = results.get(0);
@@ -246,11 +263,13 @@ public class DBView implements Observer {
             }
         } else if (notification.type == ObserverNotification.Type.QUERY_RESULT) {
             ArrayList<QueryResult> queryResults = (ArrayList<QueryResult>) notification.obj;
-            populateQueryResultTable(queryResults);
             if(queryResults.isEmpty()) {
                 clearResultsButton.setDisable(true);
+                resultTable.getItems().clear();
+
             } else {
                 clearResultsButton.setDisable(false);
+                populateQueryResultTable(queryResults);
             }
         }
     }

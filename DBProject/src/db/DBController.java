@@ -23,6 +23,11 @@ public class DBController {
         model.selectPlayers();
     }
 
+    public void selectPlayers(String table) {
+        System.out.println(table);
+        model.selectPlayers(table);
+    }
+
     public void clearQueryResults() {
         model.clearResults();
     }

@@ -45,7 +45,20 @@ def coachseasondata():
             writer.writerow({'year':row['year'], 'cid':row['ï»¿coachid'],
                              'tid':row['team'], 'win':row['season_win'],
                              'loss':row['season_loss']})
-        csvfile.close()    
+        csvfile.close()
+
+
+def playerseasondata():
+    with open("player_season.csv") as csvfile:
+        reader = csv.DictReader(csvfile)
+        fieldnames = ['year', 'pid', 'tid', 'mvp', 'ppg', 'pnum']
+        writer = csv.DictWriter(open('playerseasons.csv','w'), fieldnames = fieldnames)
+        writer.writeheader()
+        for row in reader:
+            writer.writerow({'year':row['year'], 'cid':row['ilkid'],
+                             'tid':row['team'], 'win':row['season_win'],
+                             'ppg':row['ppg'], 'pnum':row['pnum']})
+        csvfile.close()  
 
 def main():
     #playerdata()

@@ -1,11 +1,14 @@
 package tables;
 
+import db.QueryResult;
+import objects.CoachSeason;
 import objects.TeamSeason;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -57,12 +60,14 @@ public class TeamSeasonTable {
     public static void createTeamSeasonTable(Connection conn){
         try{
             String query = "CREATE TABLE IF NOT EXISTS team_season("
-                    + "SEASON_YEAR VARCHAR(255) PRIMARY KEY,"
                     + "TEAM_ID VARCHAR(255),"
+                    + "SEASON_YEAR VARCHAR(255),"
                     + "LEAGUE VARCHAR(255),"
                     + "WINS INT,"
                     + "LOSSES INT,"
-                    + "FINISH INT);" ;
+                    + "FINISH INT,"
+                    + "CONSTRAINT pk_TeamSeasonID PRIMARY KEY (TEAM_ID, SEASON_YEAR, LEAGUE)"
+                    + ");" ;
             Statement stmt = conn.createStatement();
             stmt.execute(query);
         } catch(SQLException e){
@@ -90,5 +95,20 @@ public class TeamSeasonTable {
 
         return sb.toString();
     }
-	
+
+    public static ArrayList<QueryResult> selectTeamSeason(Connection conn) {
+        String query = "SELECT * FROM team_season;";
+        ArrayList<QueryResult> results = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            while(result.next()){
+                results.add(new CoachSeason(result.getString(1), result.getString(2), result.getString(3), result.getInt(4), result.getInt(5)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
 }

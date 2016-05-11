@@ -59,12 +59,13 @@ public class PlayerSeasonTable {
     public static void createPlayerSeasonTable(Connection conn){
         try{
             String query = "CREATE TABLE IF NOT EXISTS player_season("
-                    + "SEASON_YEAR VARCHAR(255) PRIMARY KEY,"
+                    + "SEASON_YEAR VARCHAR(255),"
                     + "PLAYER_ID VARCHAR(255),"
                     + "TEAM_ID VARCHAR(255),"
                     + "MVP BOOLEAN,"
                     + "PPG FLOAT(6, 3),"
-                    + "PLAYER_NUMBER INT"
+                    + "PLAYER_NUMBER INT,"
+                    + "CONSTRAINT pk_playerSeasonID PRIMARY KEY (PLAYER_ID, SEASON_YEAR)"
                     + ");" ;
             Statement stmt = conn.createStatement();
             stmt.execute(query);

@@ -1,14 +1,9 @@
 package db;
 
 import org.h2.jdbc.JdbcSQLException;
-import tables.CoachSeasonTable;
-import tables.CoachTable;
-import tables.PlayerTable;
-import tables.TeamTable;
+import tables.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * This is a sample main program. 
@@ -23,8 +18,7 @@ public class H2DB {
 	//The connection to the database
 	private Connection conn;
 	private final String PATH = System.getProperty("user.dir") + "\\src\\csv\\";
-	public static Connection test;
-	
+
 	/**
 	 * Create a database connection with the given params
 	 * @param location: path of where to place the database
@@ -46,11 +40,11 @@ public class H2DB {
 			conn = DriverManager.getConnection(url,
 					                           user,
 					                           password);
-			test = conn;
 		} catch (SQLException | ClassNotFoundException e) {
 			//You should handle this better
-			e.printStackTrace();
-		}
+            System.err.println("Database already in use! -- Please close existing connections");
+            System.exit(1);
+        }
 	}
 	
 	/**
@@ -62,7 +56,7 @@ public class H2DB {
 	}
 	
 	/**
-	 * When your database program exits 
+	 * When your database program exits
 	 * you should close the connection
 	 */
 	public void closeConnection(){
@@ -84,94 +78,170 @@ public class H2DB {
 
 		//Create the database connections, basically makes the database
 		createConnection(location, user, password);
-
-		try {
-
-			/**
-			 * Creates a sample objects.Player table
-			 * and populates it from a csv file
-			 */
-			PlayerTable.createPlayerTable(getConnection());
-			PlayerTable.populatePlayerTableFromCSV(getConnection(),
-					PATH + "players.csv");
-		}
-		catch (JdbcSQLException jde) {
-			if (jde.toString().contains("Unique index")) {
-				// TODO: Total hack, get rid of this
-				// no-op
-			} else {
-				jde.printStackTrace();
-			}
-		}
-			catch(Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
-
-			/**
-			 * Creates a sample coach table
-			 * and populates it from a csv file
-			 */
-			CoachTable.createCoachTable(getConnection());
-			CoachTable.populateCoachTableFromCSV(
-					getConnection(),
-					PATH + "coaches.csv");
-		} catch (JdbcSQLException jde) {
-			if(jde.toString().contains("Unique index")) {
-				// TODO: Total hack, get rid of this
-				// no-op
-			}
-			else {
-				jde.printStackTrace();
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		try {
-
-			/**
-			 * Creates a sample team table
-			 * and populates it from a csv file
-			 */
-			TeamTable.createTeamTable(getConnection());
-			TeamTable.populateTeamTableFromCSV(
-					getConnection(),
-					PATH + "teams.csv");
-		} catch (JdbcSQLException jde) {
-			if(jde.toString().contains("Unique index")) {
-				// TODO: Total hack, get rid of this
-				// no-op
-			}
-			else {
-				jde.printStackTrace();
-			}
-			} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-
-			/**
-			 * Creates a sample team table
-			 * and populates it from a csv file
-			 */
-			CoachSeasonTable.createCoachSeasonTable(getConnection());
-			CoachSeasonTable.populateCoachSeasonTableFromCSV(
-					getConnection(),
-					PATH + "coachseasons.csv");
-		} catch (JdbcSQLException jde) {
-			if(jde.toString().contains("Unique index")) {
-				// TODO: Total hack, get rid of this
-				// no-op
-			}
-			else {
-				jde.printStackTrace();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
+    public boolean initTable(String table) {
+        if (table.equals("PLAYERS")) {
+            try {
+
+                /**
+                 * Creates a sample objects.Player table
+                 * and populates it from a csv file
+                 */
+                PlayerTable.createPlayerTable(getConnection());
+                PlayerTable.populatePlayerTableFromCSV(getConnection(),
+                        PATH + "players.csv");
+            }
+            catch (JdbcSQLException jde) {
+                if (jde.toString().contains("Unique index")) {
+                    return false;
+                } else {
+                    jde.printStackTrace();
+                }
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if (table.equals("PLAYER_SEASONS")) {
+            try {
+
+                /**
+                 * Creates a sample team table
+                 * and populates it from a csv file
+                 */
+                PlayerSeasonTable.createPlayerSeasonTable(getConnection());
+                PlayerSeasonTable.populatePlayerSeasonTableFromCSV(
+                        getConnection(),
+                        PATH + "playerseasons.csv");
+            } catch (JdbcSQLException jde) {
+                if(jde.toString().contains("Unique index")) {
+                    return false;
+                }
+                else {
+                    jde.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if (table.equals("COACHES")) {
+            try {
+
+                /**
+                 * Creates a sample coach table
+                 * and populates it from a csv file
+                 */
+                CoachTable.createCoachTable(getConnection());
+                CoachTable.populateCoachTableFromCSV(
+                        getConnection(),
+                        PATH + "coaches.csv");
+            } catch (JdbcSQLException jde) {
+                if(jde.toString().contains("Unique index")) {
+                    return false;
+                }
+                else {
+                    jde.printStackTrace();
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if(table.equals("TEAMS")) {
+            try {
+
+                /**
+                 * Creates a sample team table
+                 * and populates it from a csv file
+                 */
+                TeamTable.createTeamTable(getConnection());
+                TeamTable.populateTeamTableFromCSV(
+                        getConnection(),
+                        PATH + "teams.csv");
+            } catch (JdbcSQLException jde) {
+                if(jde.toString().contains("Unique index")) {
+                    return false;
+                }
+                else {
+                    jde.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if (table.equals("COACH_SEASONS")) {
+            try {
+
+                /**
+                 * Creates a sample team table
+                 * and populates it from a csv file
+                 */
+                CoachSeasonTable.createCoachSeasonTable(getConnection());
+                CoachSeasonTable.populateCoachSeasonTableFromCSV(
+                        getConnection(),
+                        PATH + "coachseasons.csv");
+            } catch (JdbcSQLException jde) {
+                if(jde.toString().contains("Unique index")) {
+                    return false;
+                }
+                else {
+                    jde.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if (table.equals("TEAM_SEASONS")) {
+            try {
+
+                /**
+                 * Creates a sample team table
+                 * and populates it from a csv file
+                 */
+                TeamSeasonTable.createTeamSeasonTable(getConnection());
+                TeamSeasonTable.populateTeamSeasonTableFromCSV(
+                        getConnection(),
+                        PATH + "teamseasons.csv");
+            } catch (JdbcSQLException jde) {
+                if(jde.toString().contains("Unique index")) {
+                    return false;
+                }
+                else {
+                    jde.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
+    }
+
+    public boolean dropTable(String table) {
+        try {
+            String query = "DROP TABLE " + table + ";";
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public ResultSet showTables() {
+        try {
+            String query = "SHOW TABLES;";
+            Statement stmt = conn.createStatement();
+            return stmt.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

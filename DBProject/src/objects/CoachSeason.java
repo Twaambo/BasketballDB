@@ -9,21 +9,19 @@ import java.util.ArrayList;
 public class CoachSeason implements QueryResult {
 	public static final ArrayList<String> Parameters = new ArrayList() {{
 		add("seasonYear");
-		add("playerID");
+		add("coachID");
 		add("teamID");
-		add("MVP");
-		add("PPG");
-		add("playerNumber");
+		add("win");
+		add("loss");
 	}};
 
 	public static final ObservableList<String> ColHeaders =
 			FXCollections.observableArrayList(
 					"seasonYear",
-					"playerID",
+					"coachID",
 					"teamID",
-					"MVP",
-					"PPG",
-					"playerNumber"
+					"win",
+					"loss"
 			);
 	
 	private String seasonYear;

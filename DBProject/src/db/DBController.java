@@ -1,5 +1,7 @@
 package db;
 
+import java.util.ArrayList;
+
 /**
  * Created by Kenny on 5/4/2016.
  */
@@ -19,16 +21,23 @@ public class DBController {
         model.clearCriterias();
     }
 
-    public void selectPlayers() {
-        model.selectPlayers();
-    }
-
     public void selectPlayers(String table) {
-        System.out.println(table);
         model.selectPlayers(table);
     }
 
     public void clearQueryResults() {
         model.clearResults();
+    }
+
+    public void dropTable(String table) {
+        model.dropTable(table);
+    }
+
+    public void updateTables() {
+        model.updateTables();
+    }
+
+    public void initTable(String table) {
+        model.initTable(table);
     }
 }

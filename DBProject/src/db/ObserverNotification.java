@@ -6,7 +6,12 @@ package db;
 public class ObserverNotification {
     public enum Type {
         SEARCH_CRITERIA,
-        QUERY_RESULT_CLEAR, QUERY_RESULT
+        QUERY_RESULT_CLEAR,
+        TABLE_UPDATE,
+        DROP_TABLE_SUCCESS,
+        DROP_TABLE_FAILURE,
+        INIT_TABLE_SUCCESS,
+        INIT_TABLE_FAILURE, QUERY_RESULT
     }
 
     public Type type;

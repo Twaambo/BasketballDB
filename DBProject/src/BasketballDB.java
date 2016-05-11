@@ -5,17 +5,22 @@ import javafx.stage.Stage;
 import views.DBView;
 
 public class BasketballDB extends Application {
+
+    private DBModel model;
+    private DBController controller;
+    private DBView view;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         // Initialize Database
 //        db.H2DB hMain = new db.H2DB();
 //        hMain.init();
 
-        DBModel model = new DBModel();
-        DBController controller = new DBController(model);
-        DBView view = new DBView(controller, primaryStage);
-
+        model = new DBModel();
+        controller = new DBController(model);
+        view = new DBView(controller, primaryStage);
         model.addObserver(view);
+        controller.updateTables();
 
         // Window Properties
         primaryStage.setTitle("Basketball Database");
@@ -24,6 +29,12 @@ public class BasketballDB extends Application {
         primaryStage.setResizable(false);
 
         primaryStage.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        model.tearDown();
     }
 
     public static void main(String[] args) {

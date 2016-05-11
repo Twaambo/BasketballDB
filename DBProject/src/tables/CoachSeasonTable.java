@@ -1,4 +1,7 @@
-package BasketballDB.tables;
+package tables;
+
+
+import objects.CoachSeason;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,9 +10,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import BasketballDB.objects.Coach;
-import BasketballDB.objects.CoachSeason;
 
 public class CoachSeasonTable {
 

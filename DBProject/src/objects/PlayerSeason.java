@@ -1,6 +1,30 @@
-package BasketballDB.objects;
+package objects;
 
-public class PlayerSeason {
+import db.QueryResult;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
+
+public class PlayerSeason implements QueryResult {
+	public static final ArrayList<String> Parameters = new ArrayList() {{
+		add("seasonYear");
+		add("playerID");
+		add("teamID");
+		add("MVP");
+		add("PPG");
+		add("playerNumber");
+	}};
+
+	public static final ObservableList<String> ColHeaders =
+			FXCollections.observableArrayList(
+					"seasonYear",
+					"playerID",
+					"teamID",
+					"MVP",
+					"PPG",
+					"playerNumber"
+			);
 	
 	private String seasonYear;
 	private String playerID;
@@ -78,4 +102,8 @@ public class PlayerSeason {
 		this.playerNumber = playerNumber;
 	}
 
+	@Override
+	public ArrayList<String> getParameters() {
+		return Parameters;
+	}
 }

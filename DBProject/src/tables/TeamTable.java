@@ -1,6 +1,7 @@
-package BasketballDB.tables;
+package tables;
 
-import BasketballDB.objects.Team;
+import db.QueryResult;
+import objects.Team;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -106,9 +107,9 @@ public class TeamTable {
         return sb.toString();
     }
 
-    public static ArrayList<Team> selectTeams(Connection conn) {
+    public static ArrayList<QueryResult> selectTeams(Connection conn) {
         String query = "SELECT * FROM teams;";
-        ArrayList<Team> results = new ArrayList<>();
+        ArrayList<QueryResult> results = new ArrayList<>();
         try {
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(query);

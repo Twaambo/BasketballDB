@@ -1,10 +1,34 @@
-package BasketballDB.objects;
+package objects;
+
+import db.QueryResult;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Hold data on a single player
  * @author Noah Shiotani
  */
-public class Player {
+public class Player implements QueryResult {
+    public static final ArrayList<String> Parameters = new ArrayList() {{
+        add("player_id");
+        add("firstName");
+        add("lastName");
+        add("dob");
+        add("position");
+    }};
+
+    public static final ObservableList<String> ColHeaders =
+            FXCollections.observableArrayList(
+                    "player_id",
+                    "firstName",
+                    "lastName",
+                    "dob",
+                    "position"
+            );
+
     //Format: first 5 letters of last name, first 2 letters of first name, then two digits
     //e.g. Rich Adelman would be ADELMRI01
     //Digits are presumably there in case people have the same name
@@ -49,5 +73,10 @@ public class Player {
 
     public String getDob() {
         return dob;
+    }
+
+    @Override
+    public ArrayList<String> getParameters() {
+        return Parameters;
     }
 }

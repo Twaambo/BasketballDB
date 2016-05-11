@@ -1,14 +1,14 @@
-package BasketballDB;
+package db;
 
-import BasketballDB.tables.CoachSeasonTable;
-import BasketballDB.tables.CoachTable;
-import BasketballDB.tables.PlayerTable;
-import BasketballDB.tables.TeamSeasonTable;
-import BasketballDB.tables.TeamTable;
-import BasketballDB.tables.PlayerSeasonTable;
 import org.h2.jdbc.JdbcSQLException;
+import tables.CoachSeasonTable;
+import tables.CoachTable;
+import tables.PlayerTable;
+import tables.TeamTable;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * This is a sample main program. 
@@ -18,10 +18,11 @@ import java.sql.*;
  * @author scj
  *
  */
-public class H2Main {
+public class H2DB {
 
 	//The connection to the database
 	private Connection conn;
+	private final String PATH = System.getProperty("user.dir") + "\\src\\csv\\";
 	public static Connection test;
 	
 	/**
@@ -75,37 +76,34 @@ public class H2Main {
 	/**
 	 * Starts and runs the database
 	 */
-	public static void init() {
-		
-		H2Main demo = new H2Main();
-		
+	public void init() {
 		// Hard drive location of the database
 		String location = System.getProperty("user.dir") + "\\basketball";
 		String user = "sa";
 		String password = "";
 
 		//Create the database connections, basically makes the database
-		demo.createConnection(location, user, password);
+		createConnection(location, user, password);
 
 		try {
 
 			/**
-			 * Creates a sample Player table
+			 * Creates a sample objects.Player table
 			 * and populates it from a csv file
 			 */
-			PlayerTable.createPlayerTable(demo.getConnection());
-			PlayerTable.populatePlayerTableFromCSV(
-					demo.getConnection(),
-					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\players.csv");
-		} catch (JdbcSQLException jde) {
-			if(jde.toString().contains("Unique index")) {
+			PlayerTable.createPlayerTable(getConnection());
+			PlayerTable.populatePlayerTableFromCSV(getConnection(),
+					PATH + "players.csv");
+		}
+		catch (JdbcSQLException jde) {
+			if (jde.toString().contains("Unique index")) {
 				// TODO: Total hack, get rid of this
 				// no-op
-			}
-			else {
+			} else {
 				jde.printStackTrace();
 			}
-		} catch (SQLException e) {
+		}
+			catch(Exception e) {
 			e.printStackTrace();
 		}
 
@@ -115,10 +113,10 @@ public class H2Main {
 			 * Creates a sample coach table
 			 * and populates it from a csv file
 			 */
-			CoachTable.createCoachTable(demo.getConnection());
+			CoachTable.createCoachTable(getConnection());
 			CoachTable.populateCoachTableFromCSV(
-					demo.getConnection(),
-					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\coaches.csv");
+					getConnection(),
+					PATH + "coaches.csv");
 		} catch (JdbcSQLException jde) {
 			if(jde.toString().contains("Unique index")) {
 				// TODO: Total hack, get rid of this
@@ -138,10 +136,10 @@ public class H2Main {
 			 * Creates a sample team table
 			 * and populates it from a csv file
 			 */
-			TeamTable.createTeamTable(demo.getConnection());
+			TeamTable.createTeamTable(getConnection());
 			TeamTable.populateTeamTableFromCSV(
-					demo.getConnection(),
-					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\teams.csv");
+					getConnection(),
+					PATH + "teams.csv");
 		} catch (JdbcSQLException jde) {
 			if(jde.toString().contains("Unique index")) {
 				// TODO: Total hack, get rid of this
@@ -153,17 +151,16 @@ public class H2Main {
 			} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		try {
 
 			/**
-			 * Creates a sample player season table
+			 * Creates a sample team table
 			 * and populates it from a csv file
 			 */
-			CoachSeasonTable.createCoachSeasonTable(demo.getConnection());
+			CoachSeasonTable.createCoachSeasonTable(getConnection());
 			CoachSeasonTable.populateCoachSeasonTableFromCSV(
-					demo.getConnection(),
-					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\coachseasons.csv");
+					getConnection(),
+					PATH + "coachseasons.csv");
 		} catch (JdbcSQLException jde) {
 			if(jde.toString().contains("Unique index")) {
 				// TODO: Total hack, get rid of this
@@ -172,29 +169,7 @@ public class H2Main {
 			else {
 				jde.printStackTrace();
 			}
-			} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-
-			/**
-			 * Creates a sample player season table
-			 * and populates it from a csv file
-			 */
-			TeamSeasonTable.createTeamSeasonTable(demo.getConnection());
-			TeamSeasonTable.populateTeamSeasonTableFromCSV(
-					demo.getConnection(),
-					System.getProperty("user.dir") + "\\src\\BasketBallDB\\csv\\teamseasons.csv");
-		} catch (JdbcSQLException jde) {
-			if(jde.toString().contains("Unique index")) {
-				// TODO: Total hack, get rid of this
-				// no-op
-			}
-			else {
-				jde.printStackTrace();
-			}
-			} catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

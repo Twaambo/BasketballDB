@@ -1,12 +1,33 @@
-package BasketballDB.objects;
+package objects;
 
-import java.lang.Integer;
+import db.QueryResult;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 /**
  * Hold data on a single coach over their career
  * @author Noah Shiotani
  */
-public class Coach {
+public class Coach implements QueryResult{
+    public static final ArrayList<String> Parameters = new ArrayList() {{
+        add("coach_id");
+        add("firstName");
+        add("lastName");
+        add("careerWins");
+        add("careerLosses");
+    }};
+
+    public static final ObservableList<String> ColHeaders =
+            FXCollections.observableArrayList(
+                    "coach_id",
+                    "firstName",
+                    "lastName",
+                    "careerWins",
+                    "careerLosses"
+            );
+
     //Format: first 5 letters of last name, first 2 letters of first name, then two digits
     //e.g. Rich Adelman would be ADELMRI01
     //Digits are presumably there in case people have the same name
@@ -51,5 +72,10 @@ public class Coach {
 
     public int getCareerLosses() {
         return careerLosses;
+    }
+
+    @Override
+    public ArrayList<String> getParameters() {
+        return Parameters;
     }
 }

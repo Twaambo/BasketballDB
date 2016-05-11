@@ -1,10 +1,31 @@
-package BasketballDB.objects;
+package objects;
+
+import db.QueryResult;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 /**
  * Hold data on a single team
  * @author Noah Shiotani
  */
-public class Team {
+public class Team implements QueryResult {
+    public static final ArrayList<String> Parameters = new ArrayList() {{
+        add("team_id");
+        add("name");
+        add("location");
+        add("league");
+    }};
+
+    public static final ObservableList<String> ColHeaders =
+            FXCollections.observableArrayList(
+                    "team_id",
+                    "name",
+                    "location",
+                    "league"
+            );
+
     private String team_id;
     private String name;
     private String location;
@@ -37,4 +58,9 @@ public class Team {
     }
 
     public String getLeague() { return league;}
+
+    @Override
+    public ArrayList<String> getParameters() {
+        return Parameters;
+    }
 }

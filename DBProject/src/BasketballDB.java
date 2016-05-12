@@ -4,6 +4,11 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import views.DBView;
 
+/**
+ * Main Driver to the Basketball program.
+ *
+ * Created by The Data Principlists.
+ */
 public class BasketballDB extends Application {
 
     private DBModel model;

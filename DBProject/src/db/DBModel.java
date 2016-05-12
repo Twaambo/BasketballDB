@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 /**
- * Created by Kenny on 5/9/2016.
+ * Created by The Data Principlists on 5/9/2016.
  */
 public class DBModel extends Observable {
 

@@ -7,16 +7,14 @@ import db.QueryResult;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.*;
 
 /**
- * Created by Kenny on 5/4/2016.
+ * Created by The Data Principlist on 5/4/2016.
  */
 public class DBView implements Observer {
     private DBController controller;

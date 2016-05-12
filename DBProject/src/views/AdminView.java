@@ -16,7 +16,7 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 
 /**
- * Created by Kenny on 5/11/2016.
+ * Created by The Data Principlists 5/11/2016.
  */
 public class AdminView {
     private DBController controller;

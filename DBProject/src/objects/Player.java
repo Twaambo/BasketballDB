@@ -10,6 +10,7 @@ import java.util.HashMap;
 /**
  * Hold data on a single player
  * @author Noah Shiotani
+ ** Created by The Data Principlists.
  */
 public class Player implements QueryResult {
     public static final ArrayList<String> Parameters = new ArrayList() {{

@@ -12,6 +12,7 @@ import java.sql.*;
  * 
  * @author scj
  *
+ * Created by The Data Principlists.
  */
 public class H2DB {
 
@@ -108,7 +109,7 @@ public class H2DB {
             try {
 
                 /**
-                 * Creates a sample team table
+                 * Creates a player seasons table
                  * and populates it from a csv file
                  */
                 PlayerSeasonTable.createPlayerSeasonTable(getConnection());
@@ -178,7 +179,7 @@ public class H2DB {
             try {
 
                 /**
-                 * Creates a sample team table
+                 * Creates a sample coach seasons table
                  * and populates it from a csv file
                  */
                 CoachSeasonTable.createCoachSeasonTable(getConnection());
@@ -201,7 +202,7 @@ public class H2DB {
             try {
 
                 /**
-                 * Creates a sample team table
+                 * Creates a sample team seasons table
                  * and populates it from a csv file
                  */
                 TeamSeasonTable.createTeamSeasonTable(getConnection());
@@ -222,6 +223,11 @@ public class H2DB {
         return true;
     }
 
+    /**
+     * Drops the table provided it exists
+     * @param table to be dropped
+     * @return true/false
+     */
     public boolean dropTable(String table) {
         try {
             String query = "DROP TABLE " + table + ";";
@@ -234,6 +240,9 @@ public class H2DB {
         return true;
     }
 
+    /**
+     * Displays all tables available for the given DB.
+     */
     public ResultSet showTables() {
         try {
             String query = "SHOW TABLES;";

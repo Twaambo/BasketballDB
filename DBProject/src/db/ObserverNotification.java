@@ -1,7 +1,7 @@
 package db;
 
 /**
- * Created by Kenny on 5/9/2016.
+ * Created by The Data Principlists. on 5/9/2016.
  */
 public class ObserverNotification {
     public enum Type {

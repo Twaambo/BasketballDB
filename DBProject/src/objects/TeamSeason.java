@@ -6,6 +6,9 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
+/**
+ * Created by The Data Principlists.
+ */
 public class TeamSeason implements QueryResult {
 	public static final ArrayList<String> Parameters = new ArrayList() {{
 		add("seasonYear");

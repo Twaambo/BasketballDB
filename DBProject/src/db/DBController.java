@@ -1,9 +1,7 @@
 package db;
 
-import java.util.ArrayList;
-
 /**
- * Created by Kenny on 5/4/2016.
+ * Created by The Data Principlists on 5/4/2016.
  */
 public class DBController {
 

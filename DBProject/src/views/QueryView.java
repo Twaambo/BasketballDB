@@ -15,7 +15,7 @@ import objects.*;
 import java.util.Optional;
 
 /**
- * Created by Kenny on 5/11/2016.
+ * Created by The Data Principlists.on 5/11/2016.
  */
 public class QueryView {
     private TableView criteriaTable;

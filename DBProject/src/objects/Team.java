@@ -9,6 +9,7 @@ import java.util.ArrayList;
 /**
  * Hold data on a single team
  * @author Noah Shiotani
+ ** Created by The Data Principlists.
  */
 public class Team implements QueryResult {
     public static final ArrayList<String> Parameters = new ArrayList() {{

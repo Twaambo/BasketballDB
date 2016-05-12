@@ -1,6 +1,7 @@
 import db.DBController;
 import db.DBModel;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import views.DBView;
 
@@ -32,6 +33,7 @@ public class BasketballDB extends Application {
         primaryStage.setHeight(550);
         primaryStage.setWidth(800);
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image("file:basketball.png"));
 
         primaryStage.show();
     }

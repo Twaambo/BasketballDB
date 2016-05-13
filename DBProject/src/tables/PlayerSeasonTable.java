@@ -64,13 +64,14 @@ public class PlayerSeasonTable {
     public static void createPlayerSeasonTable(Connection conn){
         try{
             String query = "CREATE TABLE IF NOT EXISTS player_season("
-                    + "SEASON_YEAR VARCHAR(255),"
                     + "PLAYER_ID VARCHAR(255),"
+                    + "SEASON_YEAR VARCHAR(255),"
                     + "TEAM_ID VARCHAR(255),"
-                    + "MVP BOOLEAN,"
-                    + "PPG FLOAT(6, 3),"
-                    + "PLAYER_NUMBER INT,"
-                    + "CONSTRAINT pk_playerSeasonID PRIMARY KEY (PLAYER_ID, SEASON_YEAR)"
+                    + "LEAGUE VARCHAR(255),"
+                    + "PPG FLOAT(6),"
+                    + "RPG FLOAT(6),"
+                    + "APG FLOAT(6),"
+                    + "CONSTRAINT pk_PlayerSeasonID PRIMARY KEY (PLAYER_ID, SEASON_YEAR, TEAM_ID)"
                     + ");" ;
             Statement stmt = conn.createStatement();
             stmt.execute(query);
@@ -82,12 +83,12 @@ public class PlayerSeasonTable {
     public static String createPlayerSeasonInsertSQL(ArrayList<PlayerSeason> playerSeasons){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("INSERT INTO player_season (SEASON_YEAR, PLAYER_ID, TEAM_ID, MVP, PPG, PLAYER_NUMBER) VALUES");
+        sb.append("INSERT INTO player_season (PLAYER_ID, SEASON_YEAR, TEAM_ID, LEAGUE, PPG, RPG, APG) VALUES");
 
         for(int i = 0; i < playerSeasons.size(); i++){
             PlayerSeason ps = playerSeasons.get(i);
-            sb.append(String.format("(%s,\'%s\',\'%s\',\'%b\',\'%f\',\'%d\')",
-                    ps.getSeasonYear(), ps.getPlayerID(), ps.getTeamID(), ps.getMVP(), ps.getPPG(), ps.getPlayerNumber()));
+            sb.append(String.format("(\'%s\',\'%s\',\'%s\',\'%s\',\'%f\',\'%f\',\'%f\')",
+                    ps.getSeasonYear(), ps.getPlayerID(), ps.getTeamID(), ps.getLeague(), ps.getPPG(), ps.getRPG(), ps.getAPG()));
 
             if(i != playerSeasons.size() - 1){
                 sb.append(",");
@@ -108,7 +109,7 @@ public class PlayerSeasonTable {
             ResultSet result = stmt.executeQuery(query);
 
             while(result.next()){
-                results.add(new PlayerSeason(result.getString(1), result.getString(2), result.getString(3), result.getBoolean(4), result.getFloat(5), result.getInt(6)));
+                results.add(new PlayerSeason(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getFloat(5), result.getFloat(6), result.getFloat(7)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,7 +120,7 @@ public class PlayerSeasonTable {
     public static ArrayList<QueryResult> selectPlayerSeasons(Connection conn, ArrayList<Criteria> criterias) {
         StringBuffer sb = new StringBuffer();
 
-        sb.append("SELECT * FROM players WHERE ");
+        sb.append("SELECT * FROM player_season WHERE ");
 
         String border = "";
         for(Criteria crit : criterias) {
@@ -135,7 +136,7 @@ public class PlayerSeasonTable {
             ResultSet result = stmt.executeQuery(sb.toString());
 
             while(result.next()){
-                results.add(new PlayerSeason(result.getString(1), result.getString(2), result.getString(3), result.getBoolean(4), result.getFloat(5), result.getInt(6)));
+                results.add(new PlayerSeason(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getFloat(5), result.getFloat(6), result.getFloat(7)));
             }
         } catch (SQLException e) {
             e.printStackTrace();

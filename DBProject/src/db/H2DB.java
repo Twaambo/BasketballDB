@@ -118,6 +118,7 @@ public class H2DB {
                         PATH + "playerseasons.csv");
             } catch (JdbcSQLException jde) {
                 if(jde.toString().contains("Unique index")) {
+                    jde.printStackTrace();
                     return false;
                 }
                 else {

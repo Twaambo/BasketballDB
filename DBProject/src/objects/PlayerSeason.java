@@ -14,9 +14,10 @@ public class PlayerSeason implements QueryResult {
 		add("seasonYear");
 		add("playerID");
 		add("teamID");
-		add("MVP");
+		add("league");
 		add("PPG");
-		add("playerNumber");
+		add("RPG");
+		add("APG");
 	}};
 
 	public static final ObservableList<String> ColHeaders =
@@ -24,37 +25,41 @@ public class PlayerSeason implements QueryResult {
 					"SEASON_YEAR",
 					"PLAYER_ID",
 					"TEAM_ID",
-					"MVP",
+					"LEAGUE",
 					"PPG",
-					"PLAYER_NUMBER"
+					"RPG",
+					"APG"
 			);
 	
 	private String seasonYear;
 	private String playerID;
 	private String teamID;
-	private Boolean MVP;
+	private String league;
 	private Float PPG;
-	private Integer playerNumber;
-	
+	private Float RPG;
+	private Float APG;
+
 	
 	public PlayerSeason(String seasonYear, String playerID, String teamID,
-			Boolean MVP, Float PPG, Integer playerNumber) {
+			String league, Float PPG, Float RPG, Float APG) {
 		super();
 		this.seasonYear = seasonYear;
 		this.playerID = playerID;
 		this.teamID = teamID;
-		this.MVP = MVP;
+		this.league= league;
 		this.PPG = PPG;
-		this.playerNumber = playerNumber;
+		this.RPG = RPG;
+		this.APG = APG;
 	}
 
 	public PlayerSeason(String[] data) {
 		this.seasonYear = data[0];
 		this.playerID = data[1];
 		this.teamID = data[2];
-		this.MVP = Boolean.parseBoolean(data[3]);
+		this.league = (data[3]);
 		this.PPG = Float.parseFloat(data[4]);
-		this.playerNumber = Integer.parseInt(data[5]);
+		this.RPG = Float.parseFloat(data[5]);
+		this.APG = Float.parseFloat(data[6]);
 	}
 
 	public String getSeasonYear() {
@@ -81,12 +86,28 @@ public class PlayerSeason implements QueryResult {
 		this.teamID = teamID;
 	}
 
-	public Boolean getMVP() {
-		return MVP;
+	public String getLeague() {
+		return league;
 	}
 
-	public void setMVP(Boolean mVP) {
-		MVP = mVP;
+	public void setLeague(String league) {
+		this.league = league;
+	}
+
+	public Float getRPG() {
+		return RPG;
+	}
+
+	public void setRPG(Float RPG) {
+		this.RPG = RPG;
+	}
+
+	public Float getAPG() {
+		return APG;
+	}
+
+	public void setAPG(Float APG) {
+		this.APG = APG;
 	}
 
 	public Float getPPG() {
@@ -95,14 +116,6 @@ public class PlayerSeason implements QueryResult {
 
 	public void setPPG(Float pPG) {
 		PPG = pPG;
-	}
-
-	public Integer getPlayerNumber() {
-		return playerNumber;
-	}
-
-	public void setPlayerNumber(Integer playerNumber) {
-		this.playerNumber = playerNumber;
 	}
 
 	@Override

@@ -52,15 +52,14 @@ public class DBModel extends Observable {
                 }
                 break;
             }
-            /* TODO
             case "PLAYER_SEASON": {
                 if(searchCriterias.isEmpty()) {
-                    queryResults = CoachTable.selectCoaches(database.getConnection());
+                    queryResults = PlayerSeasonTable.selectPlayerSeasons(database.getConnection());
                 } else {
-                    queryResults = CoachTable.selectCoaches(database.getConnection(), searchCriterias);
+                    queryResults = PlayerSeasonTable.selectPlayerSeasons(database.getConnection(), searchCriterias);
                 }
                 break;
-            }*/
+            }
             case "COACHES": {
                 if(searchCriterias.isEmpty()) {
                     queryResults = CoachTable.selectCoaches(database.getConnection());

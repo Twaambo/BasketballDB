@@ -44,6 +44,7 @@ public class AdminView {
         fpInit.setAlignment(Pos.CENTER);
 
         Button initTableButton = new Button("Init Table");
+        initTableButton.setDisable(true);
         initTableButton.setOnAction((event) -> {
             controller.initTable(tableInits.getValue().toString());
         });
@@ -66,6 +67,7 @@ public class AdminView {
         fpDrop.setAlignment(Pos.CENTER);
 
         Button dropTableButton = new Button("Drop Table");
+        dropTableButton.setDisable(true);
         dropTableButton.setOnAction((event) -> {
            controller.dropTable(tableDropdown.getValue().toString());
         });
